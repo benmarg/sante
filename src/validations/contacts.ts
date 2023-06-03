@@ -6,3 +6,10 @@ export const createContactSchema = z.object({
   email: z.string().trim().email().nonempty(),
   phoneNumber: z.string().trim().nonempty(),
 });
+
+export const updateContactSchema = z.object({
+  id: z.string().trim().nonempty(),
+  name: z.string().trim().optional(),
+  email: z.string().trim().email().optional(),
+  phoneNumber: z.string().trim().optional(),
+});

@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { createContactSchema } from "~/validations/contacts";
+import {
+  createContactSchema,
+  updateContactSchema,
+} from "~/validations/contacts";
 
 export const contactRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
@@ -20,4 +23,14 @@ export const contactRouter = createTRPCRouter({
       },
     });
   }),
+  update: publicProcedure
+    .input(updateContactSchema)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.prisma.contact.update({
+        where: {
+          id: input.id,
+        },
+        data: input,
+      });
+    }),
 });
