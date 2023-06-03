@@ -1,16 +1,12 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { api } from "~/utils/api";
 import { useForm } from "react-hook-form";
-import { type z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import validator from "validator";
 import {
   createContactSchema as schema,
   type CreateContactInput,
 } from "~/validations/contacts";
-import { contactRouter } from "~/server/api/routers/contact";
 
 import ContactList from "~/componenets/ContactList";
 
@@ -90,7 +86,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mx-auto">
-        <h1 className="text-4xl font-bold">Sante Contact List</h1>
+        <div className="fixed h-5 w-full bg-slate-300"></div>
+        <div className="fixed h-full w-5 bg-slate-300"></div>
+        <div className="fixed bottom-0 h-5 w-full bg-slate-300"></div>
+        <div className="fixed right-0 h-full w-5 bg-slate-300"></div>
         <div className="flex min-h-screen items-center justify-evenly">
           <Form />
           <div className="h-96 w-96">

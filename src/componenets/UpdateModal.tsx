@@ -52,15 +52,18 @@ function Form({ contact, onClose }: { contact: Contact; onClose: () => void }) {
       <input
         {...register("name")}
         placeholder="Name"
+        type="text"
         className="flex rounded-md p-1 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
       />
       <input
         {...register("email")}
         placeholder="Email Address"
+        type="email"
         className="flex rounded-md p-1 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
       />
       <input
         {...register("phoneNumber")}
+        type="tel"
         placeholder="Phone Number"
         className="flex rounded-md p-1 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
       />
