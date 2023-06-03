@@ -20,15 +20,27 @@ const Home: NextPage = () => {
       register,
       handleSubmit,
       formState: { errors },
+      reset,
     } = useForm<CreateContactInput>({
       resolver: zodResolver(schema),
     });
 
-    const { mutate, status, error } = api.contact.create.useMutation();
+    const apiContext = api.useContext();
+    const { mutate, status, error } = api.contact.create.useMutation({
+      onSuccess() {
+        return apiContext.contact.getAll.invalidate();
+      },
+    });
 
     return (
       <form
-        onSubmit={handleSubmit((data) => mutate(data))}
+        onSubmit={handleSubmit((data) =>
+          mutate(data, {
+            onSuccess() {
+              reset();
+            },
+          })
+        )}
         className="flex flex-col gap-6"
       >
         <input
@@ -57,6 +69,7 @@ const Home: NextPage = () => {
             Please Enter A Valid Phone Number
           </span>
         )}
+        {error && <span className="text-red-600">{error.message}</span>}
         {!errors.name && !errors.email && !errors.phoneNumber && <span> </span>}
         <input
           className="w-72 rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
